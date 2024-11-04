@@ -5,6 +5,10 @@ using UnityEngine;
 public class InstantiateCube : MonoBehaviour
 {
     public GameObject cubePrefab; // Reference to the cube prefab
+     void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -12,8 +16,7 @@ public class InstantiateCube : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // Instantiate a new cube at a random position
-            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), 1, Random.Range(-5f, 5f));
-            Instantiate(cubePrefab, randomPosition, Quaternion.identity);
+           Instantiate(cubePrefab, new Vector3(2, 2, 2), Quaternion.identity);
         }
     }
 }
