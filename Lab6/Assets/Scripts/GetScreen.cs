@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GetScreen : MonoBehaviour
 {
-    private string sceneName = "SampleScene"; // Initial scene name
+    private string currentSceneName; // Current active scene name
     private screenSwitch screenSwitchScript;
 
     void Start()
     {
+        // Get the name of the current active scene
+        currentSceneName = SceneManager.GetActiveScene().name;
+
         // Find and cache the screenSwitch component in the scene
         screenSwitchScript = FindObjectOfType<screenSwitch>();
 
@@ -23,23 +26,19 @@ public class GetScreen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            // Toggle scene name
-            if (sceneName == "SampleScene")
-            {
-                sceneName = "Demo";
-            }
-            else
-            {
-                sceneName = "SampleScene";
-            }
+            // Determine the next scene based on the current scene
+            string nextSceneName = (currentSceneName == "SampleScene") ? "Demo" : "SampleScene";
 
-            Debug.Log("Switching to " + sceneName + " Scene");
+            Debug.Log("Switching to " + nextSceneName + " Scene");
 
             // Call screenSwitch to change scene
             if (screenSwitchScript != null)
             {
-                screenSwitchScript.screenChanger(sceneName);
+                screenSwitchScript.screenChanger(nextSceneName);
             }
+
+            // Update the currentSceneName to reflect the newly loaded scene
+            currentSceneName = nextSceneName;
         }
     }
 }
